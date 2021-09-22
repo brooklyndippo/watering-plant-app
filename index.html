@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Water me!</title>
+</head>
+<body>
+
+	<!-- Markup -->
+	<div class="container">
+		<div>
+			<label class="days-label">
+				Days since last Watering: 
+				<input type="number" id="days-since" value="1" />
+			</label>
+			<label class="succulent-label">
+				<input type="checkbox" id="is-succulent" />
+				Is succulent
+			</label>
+		</div>
+		<p id="message"></p>
+	</div>
+
+	<!-- Scripts -->
+	<script>
+
+
+	/* ---------------- VARIABLES PULLED FROM QUERY SELECTOR --------------------*/ 
+
+		//create a variable for the days since the last water with the query selector
+		const daysSinceInput = document.querySelector('#days-since');
+
+		//create a variable to define if the plant is or is not a succulent with the query selector
+		const isSucculentInput = document.querySelector('#is-succulent');
+
+		//create a variable for message that will display based on input
+		//we will use this later with innerHTML to output a response
+		const messageP = document.querySelector('#message');
+
+	
+
+	/* ---------------- EVENT LISTENERS TO RUN FUNCTION AGAIN --------------------*/ 
+
+
+		// Add an event listener so that every time the days since input changes we call the update function
+		daysSinceInput.addEventListener('input', update);
+
+		// Add an event listener so if the checkbox is selected or unselected we call the update function
+		isSucculentInput.addEventListener('input', update);
+
+		// This update function is going to handle changes to the inputs 
+		// above and display a message in p#message. The listeners you added 
+		// adove are going to call this function when a change occurs. 
+
+	/* ---------------- FUNCTION: UPDATE THE VALUES WHEN EVENT HAPPENS --------------------*/ 	
+		function update(e) {
+			// Get the value from the days input
+			const days = daysSinceInput.value;
+			
+			// Get the value from the succulent checkbox
+			// if checked then it is TRUE, if unchecked it is FALSE
+			const isSucculent = isSucculentInput.checked
+
+
+			
+	/* ---------------- FUNCTION: CHECK IF THE PLANTS NEED TO BE WATERED --------------------*/ 	
+
+		// This waterCheck function is going to run the input values
+		// and display the appropriate output message.
+
+		function waterCheck() {
+			if (days > 3 && isSucculent == false) {
+				messageP.innerHTML = "Time to water!"
+			}
+			else if (days > 13 && isSucculent == true) {
+				messageP.innerHTML = "Time to water!"
+			}
+			else {
+				messageP.innerHTML = "No need to water."
+			}
+			}
+
+			waterCheck()
+
+		}
+
+	</script>
+	<!-- Styles -->
+	<style>
+		
+		body {
+			font-family: "Helvetica Neue";
+			font-weight: 300;
+			font-size: 18px;
+			
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+		}
+
+		.container {
+			border: 1px solid;
+			padding: 1rem;
+		}
+
+		.container div {
+			display: flex;
+			flex-direction: column;
+		}
+
+		input {
+			font-size: 1rem;
+			padding: 0.5rem;
+			border: 1px solid;
+			padding: 0.5rem;
+			margin: 1rem 0 0 0;
+		}
+
+		label.days-label {
+			display: flex;
+			text-align: center;
+			flex-direction: column;
+		}
+
+		#is-succulent {
+			margin: 1rem 1rem 0 0;
+		}
+
+		p {
+			margin: 1rem 0 0 0;
+		}
+
+	</style>
+</body>
+</html>
